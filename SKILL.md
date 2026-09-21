@@ -2,7 +2,7 @@
 name: jev-judge
 description: Get a calibrated confidence score or a fixed-label verdict for one atomic judgment — not a text answer — via Jev (TypeSafe AI's judgment model). Use whenever an LLM's self-reported confidence would not be trustworthy and code needs to threshold or branch on the result: classifying text into a fixed set of labels with a probability per label, a yes/no check with a true probability, or rating something on a defined ordered scale (urgency, severity, quality). Also fits eval/LLM-as-a-judge scoring, output verification against source text, and routing/triage by confidence. Do not use for open-ended generation, multi-step reasoning, or a decision that weighs several independent factors at once — decompose those into separate atomic questions first, or answer them directly instead of invoking this skill.
 license: Proprietary. Internal use only.
-compatibility: Requires Node 20+, npm install in the skill directory, network access, and TYPESAFE_API_KEY.
+compatibility: Requires Node 20+, network access, and TYPESAFE_API_KEY.
 metadata:
   author: nick
 ---
@@ -25,13 +25,10 @@ once; decompose a question like that into separate noul/choice/score calls inste
 to do the weighing.
 
 This skill bundles a small CLI, `scripts/cli.js`, built on the official `@typesafe-ai/sdk`
-(npm). It does not call any third-party "Jev CLI" package.
+(npm). The SDK is vendored directly into that one file, so no `npm install` step is needed.
+It does not call any third-party "Jev CLI" package.
 
 ## Setup
-
-```bash
-cd ~/.agents/skills/jev-judge && npm install
-```
 
 Requires `TYPESAFE_API_KEY` in the environment. Export it from `~/.zshenv` (Claude Code's Bash
 tool is a non-interactive zsh, which reads `~/.zshenv` but not `~/.zshrc`), or pass it inline for
