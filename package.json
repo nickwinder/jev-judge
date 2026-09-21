@@ -1,0 +1,12 @@
+{
+  "name": "jev-judge-skill",
+  "version": "1.0.0",
+  "description": "Jev CLI for the jev-judge Claude/Codex skill. Wraps the official @typesafe-ai/sdk.",
+  "main": "scripts/cli.js",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "private": true,
+  "dependencies": {
+    "@typesafe-ai/sdk": "^0.6.0"
+  }
+}
