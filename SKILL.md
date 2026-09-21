@@ -1,7 +1,7 @@
 ---
 name: jev-judge
 description: Get a calibrated confidence score or a fixed-label verdict for one atomic judgment — not a text answer — via Jev (TypeSafe AI's judgment model). Use whenever an LLM's self-reported confidence would not be trustworthy and code needs to threshold or branch on the result: classifying text into a fixed set of labels with a probability per label, a yes/no check with a true probability, or rating something on a defined ordered scale (urgency, severity, quality). Also fits eval/LLM-as-a-judge scoring, output verification against source text, and routing/triage by confidence. Do not use for open-ended generation, multi-step reasoning, or a decision that weighs several independent factors at once — decompose those into separate atomic questions first, or answer them directly instead of invoking this skill.
-license: Proprietary. Internal use only.
+license: MIT
 compatibility: Requires Node 20+, network access, and TYPESAFE_API_KEY.
 metadata:
   author: nick
