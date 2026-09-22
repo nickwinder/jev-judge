@@ -46,8 +46,9 @@ C=~/.agents/skills/jev-judge/scripts/cli.js
 # noul: yes/no as a probability
 echo "I was charged twice, please help" | node $C noul "Is this about billing?"
 
-# choice: one of your labels
-node $C choice "What is this ticket about?" billing=Payments technical=Bugs other \
+# choice: one of your labels, plus a catch-all for "doesn't fit"
+node $C choice "What is this ticket about?" billing=Payments technical=Bugs \
+  other="None of the above, or not enough information to tell" \
   --state-file ticket.txt
 
 # score: a level on your scale, low to high
@@ -62,6 +63,13 @@ node $C help                 # full flag reference
 (a `.json` file is parsed as JSON; anything else is raw text), or piped stdin. Give a `choice` or
 `score` command real descriptions for each label/level — Jev reads them, so "billing" alone
 answers worse than `billing=Customer was charged an incorrect amount`.
+
+**Always give a `choice` question a catch-all label** — `other`, `unclear`, or similar — with a
+real description ("none of the other labels fit, or the state doesn't say enough to tell"). Jev
+always picks one of the labels you give it; without a catch-all, a case that genuinely doesn't fit
+your taxonomy gets forced into the closest-sounding one instead of surfacing as unclassified. A
+high probability on the catch-all is a signal to add a label, get better state, or send the
+question to a person — not to trust whichever named label came second.
 
 Output: a `noul` answer is a single probability (0–1). A `choice` answer names the chosen label,
 a confidence, and every label's probability. A `score` answer gives an expected score (which can
